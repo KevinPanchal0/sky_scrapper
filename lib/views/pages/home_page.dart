@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
                       const SliverAppBar(
                         centerTitle: true,
                         title: Text(
-                          'Sky Scrapper',
+                          'Sky Scrapper APp',
                           style: TextStyle(fontSize: 30),
                         ),
                         elevation: 5,
