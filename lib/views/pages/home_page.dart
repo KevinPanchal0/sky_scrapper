@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage>
                       const SliverAppBar(
                         centerTitle: true,
                         title: Text(
-                          'Sky Scrapper APp',
+                          'Sky Scrapper',
                           style: TextStyle(fontSize: 30),
                         ),
                         elevation: 5,
@@ -95,7 +95,9 @@ class _HomePageState extends State<HomePage>
                                       child: Column(
                                         children: [
                                           Text(
-                                            '${whetherApi['address']}',
+                                            whetherApi['address']
+                                                .toString()
+                                                .toUpperCase(),
                                             style: const TextStyle(
                                                 fontSize: 30,
                                                 fontWeight: FontWeight.bold),
@@ -292,11 +294,15 @@ class _HomePageState extends State<HomePage>
                                   ],
                                 );
                               }
-                              return Center(
-                                  child: Container(
-                                      alignment: Alignment.center,
-                                      child:
-                                          const CircularProgressIndicator()));
+                              return Container(
+                                height:
+                                    MediaQuery.of(context).size.height / 1.2,
+                                alignment: Alignment.center,
+                                child: Text(
+                                  '${searchController.text} Not Found',
+                                  style: TextStyle(fontSize: 25),
+                                ),
+                              );
                             },
                           ),
                         ),
@@ -305,7 +311,33 @@ class _HomePageState extends State<HomePage>
                   ),
                 ),
                 SafeArea(
-                  child: TextField(),
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextField(
+                          controller: searchController,
+                          onSubmitted: (value) {
+                            if (value.isNotEmpty) {
+                              getApi = ApiHelper.apiHelper
+                                  .whetherApi(searchTerm: value);
+                              selectedIndex = 0;
+                              pageController.animateToPage(0,
+                                  duration: const Duration(milliseconds: 350),
+                                  curve: Curves.easeInOut);
+                              setState(() {});
+                            }
+                          },
+                          textInputAction: TextInputAction.search,
+                          decoration: const InputDecoration(
+                              border: OutlineInputBorder()),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
