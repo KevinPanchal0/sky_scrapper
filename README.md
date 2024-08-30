@@ -1,4 +1,4 @@
-# Departure(Bhagvad Gita App)
+# Sky Scrapper
 
 The "Departure" app aims to create an immersive and personalized experience for users seeking
 spiritual guidance through the teachings of the Bhagvat Geeta. By incorporating local JSON
