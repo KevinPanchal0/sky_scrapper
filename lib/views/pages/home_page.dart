@@ -197,6 +197,7 @@ class _HomePageState extends State<HomePage>
                                       child: SizedBox(
                                         height: 530,
                                         child: Card(
+                                          elevation: 5,
                                           child: Column(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
@@ -257,7 +258,7 @@ class _HomePageState extends State<HomePage>
                                                             ),
                                                             Expanded(
                                                               child: Text(
-                                                                '${whetherApi['days'][0]['tempmax']}',
+                                                                '${whetherApi['days'][i]['tempmax']}',
                                                                 style:
                                                                     const TextStyle(
                                                                         fontSize:
@@ -267,7 +268,7 @@ class _HomePageState extends State<HomePage>
                                                             Expanded(
                                                               child: Text(
                                                                 whetherApi['days']
-                                                                            [0][
+                                                                            [i][
                                                                         'conditions']
                                                                     .toString()
                                                                     .split(
