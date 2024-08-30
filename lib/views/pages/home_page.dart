@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sky_scrapper/helpers/api_helper.dart';
 import 'package:sky_scrapper/providers/internet_check_provider.dart';
 import 'package:intl/intl.dart';
@@ -24,6 +26,10 @@ class _HomePageState extends State<HomePage>
     Provider.of<InternetCheckProvider>(context, listen: false)
         .checkConnectivity();
     getApi = ApiHelper.apiHelper.whetherApi(searchTerm: 'London');
+  }
+
+  setPrefs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
   }
 
   late Future<Map?> getApi;
@@ -84,215 +90,229 @@ class _HomePageState extends State<HomePage>
                                   return DateFormat('EEEE')
                                       .format(date); // Convert date to day name
                                 }).toList();
-                                return Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const SizedBox(
-                                      height: 25,
-                                    ),
-                                    Center(
-                                      child: Column(
+                                return (whetherApi.isEmpty)
+                                    ? Column(
+                                        children: [],
+                                      )
+                                    : Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            whetherApi['address']
-                                                .toString()
-                                                .toUpperCase(),
-                                            style: const TextStyle(
-                                                fontSize: 30,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          Text(
-                                            '${whetherApi['resolvedAddress']}',
-                                            style:
-                                                const TextStyle(fontSize: 20),
-                                          ),
                                           const SizedBox(
                                             height: 25,
                                           ),
-                                          Text(
-                                            '${whetherApi['days'][0]['temp']}',
-                                            style:
-                                                const TextStyle(fontSize: 30),
+                                          Center(
+                                            child: Column(
+                                              children: [
+                                                Text(
+                                                  whetherApi['address']
+                                                      .toString()
+                                                      .toUpperCase(),
+                                                  style: const TextStyle(
+                                                      fontSize: 30,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                Text(
+                                                  '${whetherApi['resolvedAddress']}',
+                                                  style: const TextStyle(
+                                                      fontSize: 20),
+                                                ),
+                                                const SizedBox(
+                                                  height: 25,
+                                                ),
+                                                Text(
+                                                  '${whetherApi['days'][0]['temp']}',
+                                                  style: const TextStyle(
+                                                      fontSize: 30),
+                                                ),
+                                                const SizedBox(
+                                                  height: 25,
+                                                ),
+                                                Text(
+                                                  '${whetherApi['days'][0]['conditions']}',
+                                                  style: const TextStyle(
+                                                      fontSize: 30),
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                          const SizedBox(
-                                            height: 25,
+                                          Padding(
+                                            padding: const EdgeInsets.all(18.0),
+                                            child: SizedBox(
+                                              height: 200,
+                                              child: Card(
+                                                elevation: 5,
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    const SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    const Padding(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 8.0),
+                                                      child: Text(
+                                                        'TODAY\'S FORECAST',
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      flex: 17,
+                                                      child: GridView.builder(
+                                                        physics:
+                                                            const NeverScrollableScrollPhysics(),
+                                                        gridDelegate:
+                                                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                                          crossAxisCount: 3,
+                                                          mainAxisExtent: 150,
+                                                        ),
+                                                        itemCount: 3,
+                                                        itemBuilder:
+                                                            (context, index) {
+                                                          return Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .center,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Text(
+                                                                '${furtherForecast[index + 2]['hours'][index + 2]['datetime']}',
+                                                                style:
+                                                                    const TextStyle(
+                                                                        fontSize:
+                                                                            20),
+                                                              ),
+                                                              Text(
+                                                                '${furtherForecast[index + 2]['hours'][index + 2]['temp']}',
+                                                                style:
+                                                                    const TextStyle(
+                                                                        fontSize:
+                                                                            20),
+                                                              ),
+                                                            ],
+                                                          );
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
                                           ),
-                                          Text(
-                                            '${whetherApi['days'][0]['conditions']}',
-                                            style:
-                                                const TextStyle(fontSize: 30),
-                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(18.0),
+                                            child: SizedBox(
+                                              height: 530,
+                                              child: Card(
+                                                elevation: 5,
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    const SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    const Padding(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 8.0),
+                                                      child: Text(
+                                                        '7-DAY FORECAST',
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      child: ListView.separated(
+                                                          separatorBuilder:
+                                                              (context, i) {
+                                                            return const Padding(
+                                                              padding: EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          18.0),
+                                                              child: Divider(),
+                                                            );
+                                                          },
+                                                          physics:
+                                                              const NeverScrollableScrollPhysics(),
+                                                          itemCount: 7,
+                                                          itemBuilder:
+                                                              (context, i) {
+                                                            return Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .symmetric(
+                                                                      horizontal:
+                                                                          18.0),
+                                                              child: Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Expanded(
+                                                                    child: Text(
+                                                                      dayNames[
+                                                                          i],
+                                                                      style: const TextStyle(
+                                                                          fontSize:
+                                                                              20),
+                                                                    ),
+                                                                  ),
+                                                                  Expanded(
+                                                                    child: Text(
+                                                                      '${whetherApi['days'][i]['tempmax']}',
+                                                                      style: const TextStyle(
+                                                                          fontSize:
+                                                                              20),
+                                                                    ),
+                                                                  ),
+                                                                  Expanded(
+                                                                    child: Text(
+                                                                      whetherApi['days'][i]
+                                                                              [
+                                                                              'conditions']
+                                                                          .toString()
+                                                                          .split(
+                                                                              ',')[0],
+                                                                      style:
+                                                                          const TextStyle(
+                                                                        fontSize:
+                                                                            20,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            );
+                                                          }),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          )
                                         ],
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(18.0),
-                                      child: SizedBox(
-                                        height: 200,
-                                        child: Card(
-                                          elevation: 5,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              const SizedBox(
-                                                height: 10,
-                                              ),
-                                              const Padding(
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 8.0),
-                                                child: Text(
-                                                  'TODAY\'S FORECAST',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ),
-                                              Expanded(
-                                                flex: 17,
-                                                child: GridView.builder(
-                                                  physics:
-                                                      const NeverScrollableScrollPhysics(),
-                                                  gridDelegate:
-                                                      const SliverGridDelegateWithFixedCrossAxisCount(
-                                                    crossAxisCount: 3,
-                                                    mainAxisExtent: 150,
-                                                  ),
-                                                  itemCount: 3,
-                                                  itemBuilder:
-                                                      (context, index) {
-                                                    return Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Text(
-                                                          '${furtherForecast[index + 2]['hours'][index + 2]['datetime']}',
-                                                          style:
-                                                              const TextStyle(
-                                                                  fontSize: 20),
-                                                        ),
-                                                        Text(
-                                                          '${furtherForecast[index + 2]['hours'][index + 2]['temp']}',
-                                                          style:
-                                                              const TextStyle(
-                                                                  fontSize: 20),
-                                                        ),
-                                                      ],
-                                                    );
-                                                  },
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(18.0),
-                                      child: SizedBox(
-                                        height: 530,
-                                        child: Card(
-                                          elevation: 5,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              const SizedBox(
-                                                height: 10,
-                                              ),
-                                              const Padding(
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 8.0),
-                                                child: Text(
-                                                  '7-DAY FORECAST',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: ListView.separated(
-                                                    separatorBuilder:
-                                                        (context, i) {
-                                                      return const Padding(
-                                                        padding: EdgeInsets
-                                                            .symmetric(
-                                                                horizontal:
-                                                                    18.0),
-                                                        child: Divider(),
-                                                      );
-                                                    },
-                                                    physics:
-                                                        const NeverScrollableScrollPhysics(),
-                                                    itemCount: 7,
-                                                    itemBuilder: (context, i) {
-                                                      return Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                                horizontal:
-                                                                    18.0),
-                                                        child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .center,
-                                                          children: [
-                                                            Expanded(
-                                                              child: Text(
-                                                                dayNames[i],
-                                                                style:
-                                                                    const TextStyle(
-                                                                        fontSize:
-                                                                            20),
-                                                              ),
-                                                            ),
-                                                            Expanded(
-                                                              child: Text(
-                                                                '${whetherApi['days'][i]['tempmax']}',
-                                                                style:
-                                                                    const TextStyle(
-                                                                        fontSize:
-                                                                            20),
-                                                              ),
-                                                            ),
-                                                            Expanded(
-                                                              child: Text(
-                                                                whetherApi['days']
-                                                                            [i][
-                                                                        'conditions']
-                                                                    .toString()
-                                                                    .split(
-                                                                        ',')[0],
-                                                                style:
-                                                                    const TextStyle(
-                                                                  fontSize: 20,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      );
-                                                    }),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                );
+                                      );
                               }
                               return Container(
                                 height:
