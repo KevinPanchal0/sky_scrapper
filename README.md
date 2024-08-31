@@ -1,16 +1,29 @@
-# sky_scrapper
+# Sky Scrapper
 
-A new Flutter project.
+"Sky Scrapper" is a feature-rich weather application built using Flutter, incorporating key
+concepts such as API calling, Shared Preferences, and network connectivity. The app offers a
+comprehensive set of functionalities designed to provide users with accurate and timely weather
+information for cities, states, and countries.
 
-## Getting Started
+## Table of Contents
+- [Screenshots](#screenshots)
+- [Features](#features)
+- [Project Technologies](#project-technologies)
 
-This project is a starting point for a Flutter application.
+## Screenshots
+<img src="" alt="App Screenshot" width="200" height="400"/> &#160;
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Features
+- **API Calling:** Fetch accurate and up-to-date weather data for user-selected locations via reliable weather data APIs.
+- **Shared Preferences:** Allow users to save favorite cities or states locally for quick access to weather details.
+- **Network Connectivity:** Implement network checks to ensure seamless data retrieval and display an error screen when the network is unavailable.
+- **Search by City/State/Country:** Enable users to search for weather details by entering a city, state, or country, displaying comprehensive meteorological data.
+- **Light & Dark Themes:** Offer customizable light and dark themes for a personalized and comfortable user experience.
+- **Splash Screen:** Display an engaging splash screen with the app logo or weather-related imagery to create a positive first impression.
+- **Detail Screen:** Provide a detailed weather overview for each selected location, including hourly and daily forecasts, precipitation chances, and sunrise/sunset times.
+  
+## Project Technologies
+- **Flutter**: For building a cross-platform mobile app with a responsive and visually appealing UI.
+- **Dart**: The programming language used with Flutter for app development.
+- **SharedPreferences**: For saving simple key-value pairs like theme preferences and language settings.
+- **Connectivity Plus (Flutter Plugin)**: For handling network connectivity checks and managing offline scenarios gracefully.
