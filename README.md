@@ -1,6 +1,6 @@
 # Sky Scrapper
 
-"Sky Scrapper" is a feature-rich weather application built using Flutter, incorporating key
+Sky Scrapper" is a feature-rich weather application built using Flutter, incorporating key
 concepts such as API calling, Shared Preferences, and network connectivity. The app offers a
 comprehensive set of functionalities designed to provide users with accurate and timely weather
 information for cities, states, and countries.
