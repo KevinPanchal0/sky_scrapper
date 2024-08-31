@@ -206,7 +206,7 @@ class _HomePageState extends State<HomePage>
                                               ),
                                               const Padding(
                                                 padding: EdgeInsets.symmetric(
-                                                    horizontal: 8.0),
+                                                    horizontal: 18.0),
                                                 child: Text(
                                                   'TODAY\'S FORECAST',
                                                   style: TextStyle(
@@ -259,31 +259,37 @@ class _HomePageState extends State<HomePage>
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.all(18.0),
-                                      child: SizedBox(
-                                        height: 530,
-                                        child: Card(
-                                          elevation: 5,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              const SizedBox(
-                                                height: 10,
+                                      child: Card(
+                                        elevation: 5,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            const Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 18.0),
+                                              child: Text(
+                                                '7-DAY FORECAST',
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
-                                              const Padding(
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 8.0),
-                                                child: Text(
-                                                  '7-DAY FORECAST',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ),
-                                              Expanded(
+                                            ),
+                                            ConstrainedBox(
+                                              constraints: BoxConstraints(
+                                                  maxHeight: 550,
+                                                  minHeight: 56.0),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 18.0),
                                                 child: ListView.separated(
+                                                    shrinkWrap: true,
                                                     separatorBuilder:
                                                         (context, i) {
                                                       return const Padding(
@@ -349,8 +355,8 @@ class _HomePageState extends State<HomePage>
                                                       );
                                                     }),
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     )
